@@ -7,25 +7,25 @@
 
 import Foundation
 
-class Debouncer: NSObject {
+public class Debouncer: NSObject {
     private var timer: Timer?
     private var timeInterval: TimeInterval = 0
     private var closure: (()->())?
     
     deinit {
         self.timer?.invalidate()
-        self.timer = nil 
+        self.timer = nil
     }
     
-    init(timeInterval: TimeInterval) {
+    public init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
     }
     
-    func tick(_ closure: @escaping ()->()) {
+    public func tick(_ closure: @escaping ()->()) {
         self.closure = closure
     }
     
-    func ping() {
+    public func ping() {
         self.timer?.invalidate()
         self.timer = nil
         self.timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [weak self] _ in
